@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-            aria-controls="offcanvasScrolling">Filters
+    <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling"><i class="bi bi-funnel"></i>
     </button>
 
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -40,6 +40,7 @@
                     <label class="form-check-label" for="is_married">Is married</label>
                 </div>
                 <button type="submit" class="btn btn-info">Search</button>
+                <a class="btn btn-danger" href="{{ route('worker.index') }}">Reset</a>
             </form>
         </div>
     </div>
