@@ -17,26 +17,31 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input name="name" type="text" class="form-control" id="name" placeholder="Working name"
-                           value="{{ request()->input('name') }}">
+                           value="{{ request()->get('name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="surname" class="form-label">Surname</label>
                     <input name="surname" type="text" class="form-control" id="surname" placeholder="Working surname"
-                           value="{{  request()->input('surname') }}">
+                           value="{{  request()->get('surname') }}">
                 </div>
                 <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <input name="age" type="text" class="form-control" id="age" placeholder="Working age"
-                           value="{{  request()->input('age') }}">
+                    <label for="to" class="form-label">Age to</label>
+                    <input name="to" type="number" class="form-control" id="to" placeholder="Working age to"
+                           value="{{  request()->get('to') }}">
+                </div>
+                <div class="mb-3">
+                    <label for="from" class="form-label">Age from</label>
+                    <input name="from" type="number" class="form-control" id="from" placeholder="Working age from"
+                           value="{{  request()->get('from') }}">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input name="email" type="text" class="form-control" id="email" placeholder="Working email"
-                           value="{{  request()->input('email') }}">
+                           value="{{  request()->get('email') }}">
                 </div>
                 <div class="mb-3 form-check">
                     <input name="is_married" type="checkbox" class="form-check-input"
-                           id="is_married" {{  request()->input('is_married') ? 'checked' : '' }}>
+                           id="is_married" {{  request()->get('is_married') ? 'checked' : '' }}>
                     <label class="form-check-label" for="is_married">Is married</label>
                 </div>
                 <button type="submit" class="btn btn-info">Search</button>
@@ -83,7 +88,7 @@
         </table>
 
         <div class="pagination">
-            {{ $workers->links() }}
+            {{ $workers->withQueryString()->links() }}
         </div>
 
     @endif

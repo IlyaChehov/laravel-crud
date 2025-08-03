@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Worker\QueryWorkerRequest;
 use App\Http\Requests\Worker\StoreWorkerRequest;
 use App\Http\Requests\Worker\UpdateWorkerRequest;
 use App\Models\Worker;
@@ -10,9 +11,37 @@ use Illuminate\View\View;
 
 class WorkerController extends Controller
 {
-    public function index(): View
+    public function index(QueryWorkerRequest $request): View
     {
-        $workers = Worker::query()->paginate(10);
+        $queryData = $request->validated();
+        $queryWorker = Worker::query();
+
+        if (isset($queryData['name'])) {
+            $queryWorker->where('name', 'like', "%{$queryData['name']}%");
+        }
+
+        if (isset($queryData['surname'])) {
+            $queryWorker->where('surname', 'like', "%{$queryData['surname']}%");
+        }
+
+        if (isset($queryData['to'])) {
+            $queryWorker->where('age', '<', $queryData['to']);
+        }
+
+        if (isset($queryData['from'])) {
+            $queryWorker->where('age', '>', $queryData['from']);
+        }
+
+        if (isset($queryData['email'])) {
+            $queryWorker->where('email', 'like', "%{$queryData['email']}%");
+        }
+
+        if (isset($queryData['is_married'])) {
+            $queryWorker->where('is_married', '=', true);
+        }
+
+        $workers = $queryWorker->paginate(10);
+
         return view('worker.index', compact('workers'));
     }
 
